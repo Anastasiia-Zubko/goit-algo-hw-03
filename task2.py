@@ -15,9 +15,9 @@ def koch_curve(t, order, size):
             koch_curve(t, order - 1, size / 3)
             t.left(angle)
 
-def draw_koch_curve(order, size=300):
+def draw_koch_snowflake(order, size=300):
     """
-    Sets up the turtle environment and starts drawing the Koch curve.
+    Sets up the turtle environment and starts drawing the Koch snowflake.
     """
     window = turtle.Screen()
     window.bgcolor("white")
@@ -25,10 +25,12 @@ def draw_koch_curve(order, size=300):
     t = turtle.Turtle()
     t.speed(0)
     t.penup()
-    t.goto(-size / 2, 0)
+    t.goto(-size / 2, size / 3)
     t.pendown()
 
-    koch_curve(t, order, size)
+    for _ in range(3):
+        koch_curve(t, order, size)
+        t.right(120)
 
     window.mainloop()
 
@@ -38,7 +40,7 @@ def main():
     """
     try:
         order = int(input("Enter the recursion depth: "))
-        draw_koch_curve(order)
+        draw_koch_snowflake(order)
     except ValueError:
         print("Invalid input. Please enter an integer.")
 
